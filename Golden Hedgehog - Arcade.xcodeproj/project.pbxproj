@@ -15,6 +15,17 @@
 		14F527FF22F96B6700D2E954 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14F527FD22F96B6700D2E954 /* LaunchScreen.storyboard */; };
 		14F5280A22F96B6700D2E954 /* Golden_Hedgehog___ArcadeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5280922F96B6700D2E954 /* Golden_Hedgehog___ArcadeTests.swift */; };
 		14F5281522F96B6700D2E954 /* Golden_Hedgehog___ArcadeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5281422F96B6700D2E954 /* Golden_Hedgehog___ArcadeUITests.swift */; };
+		14F5282322F98B0100D2E954 /* Extesions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5282222F98B0100D2E954 /* Extesions.swift */; };
+		14F5282422F98B0100D2E954 /* Extesions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5282222F98B0100D2E954 /* Extesions.swift */; };
+		14F5282522F98B0100D2E954 /* Extesions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5282222F98B0100D2E954 /* Extesions.swift */; };
+		14F5282622F9A2FE00D2E954 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F527F322F96B6500D2E954 /* ViewController.swift */; };
+		14F5282722F9A2FE00D2E954 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F527F322F96B6500D2E954 /* ViewController.swift */; };
+		14F5282922FCBFC600D2E954 /* GoingUpSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5282822FCBFC600D2E954 /* GoingUpSegue.swift */; };
+		14F5282A22FCBFC600D2E954 /* GoingUpSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5282822FCBFC600D2E954 /* GoingUpSegue.swift */; };
+		14F5282B22FCBFC600D2E954 /* GoingUpSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5282822FCBFC600D2E954 /* GoingUpSegue.swift */; };
+		14F5282D22FD602F00D2E954 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5282C22FD602F00D2E954 /* SecondViewController.swift */; };
+		14F5282E22FD602F00D2E954 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5282C22FD602F00D2E954 /* SecondViewController.swift */; };
+		14F5282F22FD602F00D2E954 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5282C22FD602F00D2E954 /* SecondViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +60,9 @@
 		14F5281022F96B6700D2E954 /* Golden Hedgehog - ArcadeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Golden Hedgehog - ArcadeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14F5281422F96B6700D2E954 /* Golden_Hedgehog___ArcadeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Golden_Hedgehog___ArcadeUITests.swift"; sourceTree = "<group>"; };
 		14F5281622F96B6700D2E954 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14F5282222F98B0100D2E954 /* Extesions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extesions.swift; sourceTree = "<group>"; };
+		14F5282822FCBFC600D2E954 /* GoingUpSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoingUpSegue.swift; sourceTree = "<group>"; };
+		14F5282C22FD602F00D2E954 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +115,9 @@
 			children = (
 				14F527F122F96B6500D2E954 /* AppDelegate.swift */,
 				14F527F322F96B6500D2E954 /* ViewController.swift */,
+				14F5282C22FD602F00D2E954 /* SecondViewController.swift */,
+				14F5282222F98B0100D2E954 /* Extesions.swift */,
+				14F5282822FCBFC600D2E954 /* GoingUpSegue.swift */,
 				14F527F522F96B6500D2E954 /* Main.storyboard */,
 				14F527FB22F96B6700D2E954 /* Assets.xcassets */,
 				14F527FD22F96B6700D2E954 /* LaunchScreen.storyboard */,
@@ -259,6 +276,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14F5282D22FD602F00D2E954 /* SecondViewController.swift in Sources */,
+				14F5282322F98B0100D2E954 /* Extesions.swift in Sources */,
+				14F5282922FCBFC600D2E954 /* GoingUpSegue.swift in Sources */,
 				14F527F422F96B6500D2E954 /* ViewController.swift in Sources */,
 				14F527F222F96B6500D2E954 /* AppDelegate.swift in Sources */,
 				14F527FA22F96B6500D2E954 /* Golden_Hedgehog___Arcade.xcdatamodeld in Sources */,
@@ -269,7 +289,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14F5282622F9A2FE00D2E954 /* ViewController.swift in Sources */,
+				14F5282422F98B0100D2E954 /* Extesions.swift in Sources */,
 				14F5280A22F96B6700D2E954 /* Golden_Hedgehog___ArcadeTests.swift in Sources */,
+				14F5282E22FD602F00D2E954 /* SecondViewController.swift in Sources */,
+				14F5282A22FCBFC600D2E954 /* GoingUpSegue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +301,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14F5282722F9A2FE00D2E954 /* ViewController.swift in Sources */,
+				14F5282522F98B0100D2E954 /* Extesions.swift in Sources */,
 				14F5281522F96B6700D2E954 /* Golden_Hedgehog___ArcadeUITests.swift in Sources */,
+				14F5282F22FD602F00D2E954 /* SecondViewController.swift in Sources */,
+				14F5282B22FCBFC600D2E954 /* GoingUpSegue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
