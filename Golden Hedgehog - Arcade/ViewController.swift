@@ -18,13 +18,15 @@ class ViewController: UIViewController {
     var holes = [UIView]()
     var leaves = [UIView]()
     var collisionBehaviour = UICollisionBehavior()
-    let sizeOfHedgehog = CGSize(width: 50, height: 50)
+    var sizeOfHedgehog = CGSize(width: 50, height: 50)
     var sizeOfHole = CGSize(width: 50, height: 50)
-    let sizeOfLeaf = CGSize(width: 20, height: 20)
+    var sizeOfLeaf = CGSize(width: 20, height: 20)
     var currentScore = 0
     var level : Int = 1
     var record : Int = 0
-    var howManyLeaves = 3
+    var howManyLeaves = 1
+    var area : CGFloat = 0
+    
     
     var timerFired = false
     
@@ -35,6 +37,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.area = self.view.frame.height * self.view.frame.width
+        
+        self.configureViews()
         
         if let record = UserDefaults.standard.value(forKey: "UserRecord") as? Int {
             self.lblRecord.text = "Record: \(record)"
@@ -50,16 +56,20 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let vc = self
-        if (vc.level > 5) && (vc.level <= 10) {
+        if self.level <= 2 {
+            self.howManyLeaves = 1
+        } else if (self.level > 2) && (self.level <= 5) {
             //let offset = CGFloat(vc.level - 5) * 2.5
             //vc.sizeOfHole = CGSize(width: vc.sizeOfHole.width + offset, height: vc.sizeOfHole.height + offset)
-            vc.howManyLeaves = 4
-        } else if (vc.level > 10) {
-            vc.howManyLeaves = 5
+            self.howManyLeaves = 2
+        } else if (self.level > 5) && (self.level <= 9) {
+            self.howManyLeaves = 3
+        } else if (self.level > 9) && (self.level <= 15) {
+            self.howManyLeaves = 4
+        } else if (self.level > 15) {
+            self.howManyLeaves = 5
         }
         
-        print(self.level)
         self.lblCurrent.text = "\(self.currentScore)"
         self.lblRecord.text = "Record: \(self.record)"
     }
@@ -87,6 +97,26 @@ class ViewController: UIViewController {
     override func unwind(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
         let segue = GoingUpSegue(identifier: unwindSegue.identifier, source: unwindSegue.source, destination: unwindSegue.destination)
         segue.perform()
+        
+    }
+    
+    func configureViews() {
+        
+        self.sizeOfHedgehog = CGSize(width: self.sizeOfHedgehog.width * sqrt(area/304500.0), height: self.sizeOfHedgehog.height * sqrt(area/304500.0))
+        self.sizeOfHole = CGSize(width: self.sizeOfHole.width * sqrt(area/304500.0) , height: self.sizeOfHole.height * sqrt(area/304500.0))
+        self.sizeOfLeaf = CGSize(width: self.sizeOfLeaf.width * sqrt(area/304500.0), height: self.sizeOfLeaf.height * sqrt(area/304500.0))
+        
+        let xOffset = self.view.frame.width/375
+        let yOffset = self.view.frame.height/812
+        
+        let framePlay = self.btnPlay.frame
+        self.btnPlay.frame = CGRect(x: framePlay.origin.x * xOffset, y: framePlay.origin.y * yOffset, width: framePlay.size.width * xOffset, height: framePlay.size.height * yOffset)
+        
+        let frameCurrent = self.lblCurrent.frame
+        self.lblCurrent.frame = CGRect(x: frameCurrent.origin.x * xOffset, y: frameCurrent.origin.y * yOffset, width: frameCurrent.size.width * xOffset, height: frameCurrent.size.height * yOffset)
+        
+        let frameRecord = self.lblRecord.frame
+        self.lblRecord.frame = CGRect(x: frameRecord.origin.x * xOffset, y: frameRecord.origin.y * yOffset, width: frameRecord.size.width * xOffset, height: frameRecord.size.height * yOffset)
         
     }
     
@@ -184,7 +214,7 @@ class ViewController: UIViewController {
     }
     
     func createAHedgehog() {
-        hedgehogView = UIView(frame: CGRect(origin: CGPoint(x: self.view.frame.width/2 - 25, y: self.view.frame.height - 55), size: sizeOfHedgehog))
+        hedgehogView = UIView(frame: CGRect(origin: CGPoint(x: self.view.frame.width/2 - self.sizeOfHedgehog.width/2, y: self.view.frame.height - 55 * sqrt(area/304500.0)), size: sizeOfHedgehog))
         hedgehogView.backgroundColor = UIColor.blue
         hedgehogView.layer.cornerRadius = self.sizeOfHedgehog.width/2
         self.view.addSubview(hedgehogView)
@@ -196,8 +226,8 @@ class ViewController: UIViewController {
         for hole in holes {
             let field = UIFieldBehavior.radialGravityField(position: hole.center)
             field.region = UIRegion(radius: self.sizeOfHole.width)
-            field.strength = 400/CGPoint.distance(Between: hole.center, and: self.hedgehogView.center )
-            field.falloff = 5
+            field.strength = 400 * (area/304500.0) / CGPoint.distance(Between: hole.center, and: self.hedgehogView.center )
+            field.falloff = 5 * sqrt(area/304500.0)
             field.minimumRadius = self.sizeOfHole.width
             field.addItem(self.hedgehogView)
             self.animator.addBehavior(field)
@@ -205,7 +235,7 @@ class ViewController: UIViewController {
     }
     
     @objc func stopGame() {
-        //self.timer.invalidate()
+        self.timer.invalidate()
         self.timer = Timer()
         self.hedgehogView.removeFromSuperview()
         for hole in self.holes {
@@ -232,6 +262,8 @@ class ViewController: UIViewController {
         self.checkRecord()
         self.currentScore = 0
         self.lblCurrent.text = "0"
+        self.level = 1
+        self.howManyLeaves = 1
         
         self.btnPlay.isHidden = false
         
@@ -247,7 +279,7 @@ class ViewController: UIViewController {
     
     @objc func endGame() {
         
-        self.timer.invalidate()
+        //self.timer.invalidate()
         self.stopGame()
         
         self.checkRecordAndShowButton()
@@ -298,9 +330,9 @@ class ViewController: UIViewController {
         let deltaY = location.y - hedgehogCenter.y
         pushBehavior.pushDirection = CGVector(dx: deltaX, dy: deltaY)
         
-        pushBehavior.magnitude = 1
+        pushBehavior.magnitude = 1 * (area/304500) * sqrt(area/304500)
         pushBehavior.active = true
-        self.perform(#selector(reverse), with: nil, afterDelay: 1)
+        //self.perform(#selector(reverse), with: nil, afterDelay: 1)
        
     }
     
@@ -329,7 +361,7 @@ extension ViewController : UICollisionBehaviorDelegate {
     func collisionBehavior(_ behavior: UICollisionBehavior, beganContactFor item: UIDynamicItem, withBoundaryIdentifier identifier: NSCopying?, at p: CGPoint) {
         let id = identifier as? String
         let it = item as? UIView
-        let bounceMagnitude : CGFloat = 1
+        let bounceMagnitude : CGFloat = 1 * (area/304500.0) * sqrt(area/304500)
         if it == hedgehogView {
             if (id == "verticalMax") {
                 pushBehavior.pushDirection = CGVector(dx: 0, dy: 1)
